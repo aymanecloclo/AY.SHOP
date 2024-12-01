@@ -1,12 +1,10 @@
+import AYShopLogo from '../images/AYSHOP_logo.png'
+const MobileMenu=({menu, showMenu})=>{
 
-import AYShopLogo from "../images/AYSHOP_logo.png";
-export  const Menu= ({menu,showMenu}) => (
-
-  <div className="lg:flex items-center lg:gap-48 px-10 py-3">
-  
-  {/* desktop section  */}
-  <ul
-  className={` hidden  lg:flex lg:gap-x-10 max-lg:space-y-3 max-lg:fixed max-lg:bg-white max-lg:w-2/3 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-4 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50`}>
+    return(
+        <>
+             <ul
+  className={`${!showMenu? 'w-0  ':'absolute top-0 transition-all  bg-white max-lg:bg-white max-lg:w-2/3 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-4 max-lg:h-full '} lg:hidden  z-50 max-lg:shadow-md max-lg:overflow-auto`}>
   <li className='max-lg:border-b max-lg:pb-4 px-3 lg:hidden'>
     <a href="."><img src={AYShopLogo } alt="logo" className='w-36' />
     </a>
@@ -94,71 +92,9 @@ export  const Menu= ({menu,showMenu}) => (
       ))}
 
 
-</ul>
-{/* mobile section */}
- 
-<div className="">
-<div>
-  
-<div className="mt-2 ">
-  <div className="relative flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-gray-900">
-    
-    <div className="shrink-0 select-none text-base text-gray-500 sm:text-sm/6"></div>
-    
-    <input
-      type="text"
-      placeholder="Search"
-      name="price"
-      id="price"
-      className="block lg:w-[300px] grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
-    />
-    
-    <div className="grid shrink-0 grid-cols-1 focus-within:relative lg:w-[80px] border">
-      <select
-        id="currency"
-        name="currency"
-        aria-label="Currency"
-        className="col-start-1 row-start-1 w-full appearance-none rounded-md py-1.5 pl-3 pr-7 text-base text-gray-500 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
-      >
-        <option>All</option>
-        <option>CAD</option>
-        <option>EUR</option>
-      </select>
-      <svg
-        className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
-        viewBox="0 0 16 16"
-        fill="currentColor"
-        aria-hidden="true"
-        data-slot="icon"
-      >
-        <path
-          fillRule="evenodd"
-          d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
-          clipRule="evenodd"
-        />
-      </svg>
-    </div>
-  
-    <button
-      type="button"
-      className=" rounded-r-full px-4 py-1.5   sm:text-sm/6"
-    >
-      <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 16 16"
-    fill="currentColor"
-    className="h-4 w-4 opacity-70">
-    <path
-      fillRule="evenodd"
-      d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-      clipRule="evenodd" />
-  </svg>
-    </button>
-  </div>
-</div>
+     </ul>
+        </>
+    )
+}
 
-</div>
-
-</div>
-  </div>
-);
+export default MobileMenu;

@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import AYSHOP_logo from '../assets/images/AYSHOP_logo.png'
 import { useSelector,useDispatch } from "react-redux";
-const Header = () => {
+import { RiMenu2Fill } from "react-icons/ri";
+const Header = ({handleShowMenu}) => {
   const [menuOpen, setMenuOpen] = useState(false);
    const {user,isAuth}=useSelector((state)=>state.user);
   console.log();
@@ -11,11 +12,14 @@ const Header = () => {
 
   return (
     <header className="shadow-md bg-white font-[sans-serif] tracking-wide relative z-50">
-      <section className="flex items-center flex-wrap  gap-4 lg:py-0  sm:px-10 px-4 border-gray-200 border-b min-h-[75px]">
-
+      <section className="flex items-center justify-between flex-wrap  gap-4 lg:py-0  sm:px-10 px-4 border-gray-200 border-b min-h-[75px]">
+             {/*  mobie menu button  */}
+         <div className="flex lg:hidden cursor-pointer"  onClick={handleShowMenu}>
+               <RiMenu2Fill size={25}/>
+         </div>
         {/* Logo */}
         <a href="." className="shrink-0">
-          <img src={AYSHOP_logo } alt="logo" className=" object-cover lg:w-[90px] w-36 lg:h-20" />
+          <img src={AYSHOP_logo } alt="logo" className=" object-cover lg:w-[90px] hidden lg:block lg:h-20" />
         </a>
 
         {/* Right side items (icons and profile) */}
