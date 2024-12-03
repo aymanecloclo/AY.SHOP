@@ -22,8 +22,8 @@ export default function Nav() {
 
       <TopNav />
   
-      <Menu menu={menu}    />
-        <MobileMenu  showMenu={showMenu}  menu={menu}/>
+         <Menu menu={menu}    />
+        <MobileMenu handleShowMenu={handleShowMenu}  showMenu={showMenu}  menu={menu}/>
    
     </>
   );

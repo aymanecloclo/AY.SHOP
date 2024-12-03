@@ -2,11 +2,11 @@
 import AYShopLogo from "../images/AYSHOP_logo.png";
 export  const Menu= ({menu,showMenu}) => (
 
-  <div className="lg:flex items-center lg:gap-48 px-10 py-3">
+  <div className="  px-10 py-3">
   
   {/* desktop section  */}
   <ul
-  className={` hidden  lg:flex lg:gap-x-10 max-lg:space-y-3 max-lg:fixed max-lg:bg-white max-lg:w-2/3 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-4 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50`}>
+  className={` hidden  lg:gap-x-10 max-lg:space-y-3 max-lg:fixed max-lg:bg-white max-lg:w-2/3 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-4 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50`}>
   <li className='max-lg:border-b max-lg:pb-4 px-3 lg:hidden'>
     <a href="."><img src={AYShopLogo } alt="logo" className='w-36' />
     </a>

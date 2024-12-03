@@ -1,14 +1,15 @@
 import AYShopLogo from '../images/AYSHOP_logo.png'
-const MobileMenu=({menu, showMenu})=>{
+const MobileMenu=({menu, showMenu,handleShowMenu})=>{
 
     return(
         <>
              <ul
-  className={`${!showMenu? 'w-0  ':'absolute top-0 transition-all  bg-white max-lg:bg-white max-lg:w-2/3 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-4 max-lg:h-full '} lg:hidden  z-50 max-lg:shadow-md max-lg:overflow-auto`}>
+  className={`${!showMenu? 'w-0 hidden  ':' transition-all duration-300  absolute top-0  bg-white max-lg:bg-white max-lg:w-2/3 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-4 max-lg:h-full '} lg:hidden  z-50 max-lg:shadow-md max-lg:overflow-auto`}>
   <li className='max-lg:border-b max-lg:pb-4 px-3 lg:hidden'>
     <a href="."><img src={AYShopLogo } alt="logo" className='w-36' />
     </a>
   </li>
+  <li onClick={handleShowMenu}>x</li>
   <li className='max-lg:border-b max-lg:px-3 max-lg:py-3 lg:py-2'><a href='.'
       className='hover:text-gray-900 text-black font-semibold block text-[15px]'>Home</a></li>
   <li className='group max-lg:border-b max-lg:px-3 max-lg:py-3 lg:py-2 relative'>
