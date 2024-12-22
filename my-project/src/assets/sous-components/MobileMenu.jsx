@@ -1,12 +1,6 @@
 import AYShopLogo from '../images/AYSHOP_logo.png'
-
-import { FaGamepad, FaLaptop, FaDesktop, FaHeadphones,FaRegWindowClose  } from 'react-icons/fa';
-const categories = [
-  { name: 'Accessoires', icon: <FaHeadphones className="inline mr-2" />, href: '/accessoires' },
-  { name: 'Jeux', icon: <FaGamepad className="inline mr-2" />, href: '/jeux' },
-  { name: 'PC Gamer', icon: <FaDesktop className="inline mr-2" />, href: '/pc-gamer' },
-  { name: 'PC Portable', icon: <FaLaptop className="inline mr-2" />, href: '/pc-portable' },
-];
+import Categories from '../../data/Categories';
+import {FaRegWindowClose  } from 'react-icons/fa';
 
 const MobileMenu=({menu, showMenu,handleShowMenu})=>{
 
@@ -33,7 +27,7 @@ const MobileMenu=({menu, showMenu,handleShowMenu})=>{
     </a>
    <ul className="absolute top-12 max-lg:top-8 left-0 z-50 block space-y-2 shadow-lg bg-white max-h-0 overflow-hidden min-w-[250px] group-hover:opacity-100 group-hover:max-h-[700px] px-6 group-hover:pb-4 group-hover:pt-6 transition-all duration-500">
     {/* dropdown mobile ul */}
-      {categories.map((category, index) => (
+      {Categories.map((category, index) => (
         <li key={index} className="border-b py-3">
           <a
             href={category.href}

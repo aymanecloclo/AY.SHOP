@@ -3,6 +3,7 @@ import Cart from "./components/Cart";
 import Products from "./components/Products";
 import Nav from "./components/Nav";
 import Register from "./components/Register";
+import Footer from "./components/Footer";
 import { PrivateRoute } from "./Pages/PrivateRoute";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 export default function App() {
@@ -16,6 +17,7 @@ export default function App() {
              <Route path="/profile" element={<PrivateRoute />} />
    
       </Routes>
+      <Footer/>
     </Router>
 
     </>
