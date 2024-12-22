@@ -1,6 +1,6 @@
 import { IoMdMailUnread } from "react-icons/io";
 import { TbTruckDelivery } from "react-icons/tb";
-import whatAppLogo from "../images/whatApp_logo.png";
+import whatAppLogo from "../images/whatApp_logo.webp";
 export const TopNav = () =>
    (
   <div className="hidden lg:flex px-10 bg-slate-900 h-10 text-slate-50">

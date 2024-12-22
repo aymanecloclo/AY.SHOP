@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Register_bg from "../assets/images/Register_bg.png";
-import png_file_icon from "../assets/images/png_file_icon.png";
+import Register_bg from "../assets/images/AYSHOP_logo.png";
 import Button from "../shared/Button";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -75,12 +75,15 @@ const Register = () => {
     <div className="font-[sans-serif] bg-white md:h-screen">
       <div className="grid md:grid-cols-2 items-center gap-8 h-full">
         {/* Image Section */}
-        <div className="max-md:order-1 p-4 h-full order-2">
-          <img
-            src={Register_bg}
-            className="lg:max-w-[80%] w-full h-full object-contain block mx-auto"
+        <div className=" max-md:order-1 p-4 h-full order-2 flex items-center justify-center">
+            <DotLottieReact className="w-8/12"
+      src="https://lottie.host/e848fb09-3d38-4fc3-931a-cb46ae735a1d/A6pnUOjb9A.lottie"
+      loop
+      autoplay
+    />
+            {/* className=""
             alt="Register Background"
-          />
+          /> */}
         </div>
 
         {/* Form Section */}
@@ -147,29 +150,7 @@ const Register = () => {
             </div>
 
           
- <div className="mb-6 flex flex-col items-center ">
-              <label className="text-gray-800 text-xs block mb-2">Upload your photo</label>
-              <div className="p-3 drop-shadow-2xl bg-gradient-to-bl  to-indigo-600 md:w-48 md:h-48 h-32 w-32 aspect-square rounded-full relative border-2 border-blue-500 bg-gray-50 flex justify-center items-center shadow-lg overflow-hidden">
-                {formData.profileImage ? (
-                  <img
-                    src={URL.createObjectURL(formData.profileImage)}
-                    alt="Preview"
-                    className="h-full w-full object-cover rounded-lg"
-                  />
-                ) : (
-                  <div className="text-gray-500 text-center">
-                    <img src={png_file_icon} alt="File Icon" className="mx-auto w-12 mb-2" />
-                    Drag & drop your file or click to upload
-                  </div>
-                )}
-                <input
-                  type="file"
-                  className="absolute inset-0 opacity-0 cursor-pointer"
-                  onChange={handleImageChange}
-                />
-              </div>
-              {errors.profileImage && <span className="text-red-500">{errors.profileImage}</span>}
-            </div>
+
             <button onClick={(e)=>handleSubmit(e)} type="button" className="w-full py-3 px-6 text-sm tracking-wider font-semibold rounded-md bg-blue-600 hover:bg-blue-700 text-white focus:outline-none">
                 Creat an account
               </button>
