@@ -5,9 +5,10 @@ const Home=()=>{
 
     return(
         <>
+        <main className="bg-gray-50">
         <PubComponent/>
         <ShopBox/>
-        
+        </main>
         </>
     )
 }

@@ -3,6 +3,7 @@ import Categories from '../data/Categories'
 import { useState } from "react";
 import FilterBox from '@/assets/sous-components/FilterBox';
 import ProductList from '@/assets/sous-components/ProductCard';
+import ShopSection from './ShopSection';
 const ShopBox= (params) => {
 const [sliderValue, setSliderValue] = useState(1100);
 
@@ -20,7 +21,7 @@ const productsAll = [
     size: 'Medium',
     operatingSystem: 'Windows',
     brand: 'Dell',
-    img: 'https://example.com/laptopx.jpg', // Replace with the actual image URL
+    img: 'https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg', // Replace with the actual image URL
   },
   {
     id: 2,
@@ -32,7 +33,7 @@ const productsAll = [
     size: 'Large',
     operatingSystem: 'Windows',
     brand: 'Alienware',
-    img: 'https://example.com/gamerpro.jpg', // Replace with the actual image URL
+    img: 'https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg', // Replace with the actual image URL
   },
   {
     id: 3,
@@ -44,20 +45,21 @@ const productsAll = [
     size: 'Medium',
     operatingSystem: 'Android',
     brand: 'Samsung',
-    img: 'https://example.com/smartphonez.jpg', // Replace with the actual image URL
+    img: 'https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg', // Replace with the actual image URL
   },
   // Add more products here
 ];
 
   return(
     <>
-   <div className="flex my-24 mx-4">
+   <div className="flex my-24 mx-4 ">
       <FilterBox Categories={Categories} handleSliderChange={handleSliderChange} sliderValue={sliderValue}/>
 
       {/* Main Content (for example, products) */}
       <div className="w-full sm:w-9/12 md:w-10/12">
         {/* Content goes here */}
-        <ProductList productsAll={productsAll}/>
+        <ShopSection productsAll={productsAll}/>
+        
       </div>
     </div>
     </>
