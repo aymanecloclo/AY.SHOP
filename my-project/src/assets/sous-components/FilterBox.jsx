@@ -2,7 +2,7 @@ import { FaLifeRing, FaStar, FaStarHalfAlt, FaApple, FaWindows, FaAndroid, FaApp
 import { Slider } from "@/components/ui/slider";
 import { GiTShirt, GiSmartphone, GiLaptop, GiGamepad } from "react-icons/gi"; // Icônes supplémentaires
 
-const FilterBox = ({handleSliderChange, Categories, sliderValue}) => {
+const FilterBox = ({handleSliderChange, Categories, sliderValue, handleFilterChange}) => {
     const operatingSystems = [
         { name: 'Windows', icon: <FaWindows className="text-blue-500" /> },
         { name: 'macOS', icon: <FaApple className="text-gray-700" /> },
@@ -10,10 +10,18 @@ const FilterBox = ({handleSliderChange, Categories, sliderValue}) => {
         { name: 'iOS', icon: <FaAppleAlt className="text-gray-400" /> }
     ];
     const brands = ['Apple', 'Samsung', 'Dell', 'HP', 'Asus'];
-    const colors = ['Black', 'White', 'Red', 'Blue', 'Green'];
-    const sizes = ['Small', 'Medium', 'Large'];
+    const colors = [
+      { name: 'Black', code: '#000000' },
+      { name: 'White', code: '#FFFFFF' },
+      { name: 'Red', code: '#FF0000' },
+      { name: 'Blue', code: '#0000FF' },
+      { name: 'Green', code: '#008000' }
+    ];
+    
+ 
+const sizes = ['Small', 'Medium', 'Large']; 
     const ratings = [5, 4, 3, 2, 1];
-  
+   console.log('rendu')
   return (
     <div className="flex flex-col w-full sm:w-3/12 md:w-2/12 gap-12">
       {/* Categories Box */}
@@ -26,6 +34,7 @@ const FilterBox = ({handleSliderChange, Categories, sliderValue}) => {
             <li
               className="w-full border-b rounded-lg bg-primary-100 p-4 text-primary-700 dark:bg-slate-900 dark:text-primary-500 flex items-center gap-2 hover:bg-indigo-50 dark:hover:bg-indigo-900 transition-colors cursor-pointer"
               key={index}
+              onClick={()=>handleFilterChange('category',element.name)}
             >
               {element.icon}
               {element.name}
@@ -77,22 +86,26 @@ const FilterBox = ({handleSliderChange, Categories, sliderValue}) => {
 
       {/* Color */}
       <div>
-        <ul className="w-full text-surface dark:text-white border rounded-lg shadow-lg bg-white dark:bg-gray-800">
-          <li className="w-full border-b rounded-t-lg bg-gradient-to-r from-slate-500 to-gray-500 p-4 text-white font-bold text-lg">
-            Color
-          </li>
-          {colors.map((color, index) => (
-            <li
-              key={index}
-              className="w-full border-b rounded-lg bg-primary-100 p-4 text-primary-700 dark:bg-slate-900 dark:text-primary-500 hover:bg-indigo-50 dark:hover:bg-indigo-900 transition-colors cursor-pointer"
-            >
-              <span className="flex items-center gap-2">
-                {color}
-              </span>
-            </li>
-          ))}
-        </ul>
-      </div>
+  <ul className="w-full text-surface dark:text-white border rounded-lg shadow-lg bg-white dark:bg-gray-800">
+    <li className="w-full border-b rounded-t-lg bg-gradient-to-r from-slate-500 to-gray-500 p-4 text-white font-bold text-lg">
+      Color
+    </li>
+    {colors.map((color, index) => (
+      <li
+        key={index}
+        className="w-full flex gap-2 items-center border-b rounded-lg bg-primary-100 p-4 text-primary-700 dark:bg-slate-900 dark:text-primary-500 hover:bg-indigo-50 dark:hover:bg-indigo-900 transition-colors cursor-pointer"
+      >
+        <div
+          className=" border w-5 h-5 rounded-full"
+          style={{ backgroundColor: color.code }} // Afficher la couleur réelle ici
+        ></div>
+        <span className="flex items-center gap-2 text-sm">
+          {color.name} <span className="text-xs text-gray-500"></span>
+        </span>
+      </li>
+    ))}
+  </ul>
+</div>
 
       {/* Size */}
       <div>

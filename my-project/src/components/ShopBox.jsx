@@ -1,15 +1,10 @@
 
 import Categories from '../data/Categories'
-import { useState } from "react";
+import { useState ,useCallback} from "react";
 import FilterBox from '@/assets/sous-components/FilterBox';
 import ProductList from '@/assets/sous-components/ProductCard';
 import ShopSection from './ShopSection';
-const ShopBox= (params) => {
-const [sliderValue, setSliderValue] = useState(1100);
 
-const handleSliderChange = (value) => {
-  setSliderValue(value); 
-};
 const productsAll = [
   {
     id: 1,
@@ -21,7 +16,7 @@ const productsAll = [
     size: 'Medium',
     operatingSystem: 'Windows',
     brand: 'Dell',
-    img: 'https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg', // Replace with the actual image URL
+    imgId: 'images/xblnhd1q0elrnmag0eir',
   },
   {
     id: 2,
@@ -33,7 +28,7 @@ const productsAll = [
     size: 'Large',
     operatingSystem: 'Windows',
     brand: 'Alienware',
-    img: 'https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg', // Replace with the actual image URL
+    imgId: 'images/alienware-gamer',
   },
   {
     id: 3,
@@ -45,20 +40,48 @@ const productsAll = [
     size: 'Medium',
     operatingSystem: 'Android',
     brand: 'Samsung',
-    img: 'https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg', // Replace with the actual image URL
+    imgId: 'images/samsung-phone',
   },
-  // Add more products here
+  // Other products...
 ];
+
+const ShopBox= (params) => {
+
+const [sliderValue, setSliderValue] = useState(1100);
+const [filters, setFilters] = useState({
+  category: '',
+  size: '',
+  color: '',
+  rating: '',
+  operatingSystem: ''
+});
+const [filtereProduct,setFilteredProduct]=useState([{}]);
+console.log(filters);
+const handleSliderChange = useCallback((value) => {
+  setSliderValue(value);
+}, []);
+
+console.log(filtereProduct);
+
+const handleFilterChange = useCallback((filterType, value) => {
+  setFilters((prevFilters) => ({
+    ...prevFilters,
+    [filterType]: value,
+  }));
+  setFilteredProduct(productsAll.filter(product=>product.category==value));
+
+}, []); 
+
 
   return(
     <>
    <div className="flex my-24 mx-4 ">
-      <FilterBox Categories={Categories} handleSliderChange={handleSliderChange} sliderValue={sliderValue}/>
+      <FilterBox Categories={Categories}  handleFilterChange={handleFilterChange}   handleSliderChange={handleSliderChange} sliderValue={sliderValue}/>
 
       {/* Main Content (for example, products) */}
       <div className="w-full sm:w-9/12 md:w-10/12">
         {/* Content goes here */}
-        <ShopSection productsAll={productsAll}/>
+        <ShopSection productsAll={filtereProduct}/>
         
       </div>
     </div>

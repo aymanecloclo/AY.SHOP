@@ -1,3 +1,11 @@
+
+import { Cloudinary } from '@cloudinary/url-gen';
+import { auto } from '@cloudinary/url-gen/actions/resize';
+import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
+import { AdvancedImage } from '@cloudinary/react';
+const cld = new Cloudinary({ cloud: { cloudName: 'dqboz50e8' } });
+            {/* <img className="mx-auto h-full dark:hidden" src={product.img} alt={product.name} />
+            <img className="mx-auto hidden h-full dark:block" src={product.img} alt={product.name} /> */}
 const filterOptions = [
     { label: "The most popular", href: "#" },
     { label: "Newest", href: "#" },
@@ -75,14 +83,23 @@ const filterOptions = [
   );
   
   const ProductCard = ({ product }) => {
+    let img;
+
+    if (product.imgId) {
+      img = cld
+        .image(product.imgId) 
+        .format('auto')
+        .quality('auto')
+        .resize(auto().gravity(autoGravity()).width(500).height(500));
+    }
     return (
       <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
         <div className="h-56 w-full">
-          <a href="#">
-            <img className="mx-auto h-full dark:hidden" src={product.img} alt={product.name} />
-            <img className="mx-auto hidden h-full dark:block" src={product.img} alt={product.name} />
-          </a>
+      
+              <AdvancedImage cldImg={img} />
+        
         </div>
+  
         <div className="pt-6">
           <div className="mb-4 flex items-center justify-between gap-4">
             <span className="me-2 rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-300">
@@ -109,7 +126,14 @@ const filterOptions = [
           <div className="mt-2 flex items-center gap-2">
             <div className="flex items-center">
               {[...Array(5)].map((_, index) => (
-                <svg key={index} className={`h-4 w-4 ${index < product.rating ? "text-yellow-400" : "text-gray-300"}`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                <svg
+                  key={index}
+                  className={`h-4 w-4 ${index < product.rating ? "text-yellow-400" : "text-gray-300"}`}
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
                   <path d="M13.8 4.2a2 2 0 0 0-3.6 0L8.4 8.4l-4.6.3a2 2 0 0 0-1.1 3.5l3.5 3-1 4.4c-.5 1.7 1.4 3 2.9 2.1l3.9-2.3 3.9 2.3c1.5 1 3.4-.4 3-2.1l-1-4.4 3.4-3a2 2 0 0 0-1.1-3.5l-4.6-.3-1.8-4.2Z" />
                 </svg>
               ))}
@@ -141,6 +165,7 @@ const filterOptions = [
       </div>
     );
   };
+  
  
   
   
