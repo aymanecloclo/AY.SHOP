@@ -21,7 +21,6 @@ const FilterBox = ({handleSliderChange, Categories, sliderValue, handleFilterCha
  
 const sizes = ['Small', 'Medium', 'Large']; 
     const ratings = [5, 4, 3, 2, 1];
-   console.log('rendu')
   return (
     <div className="flex flex-col w-full sm:w-3/12 md:w-2/12 gap-12">
       {/* Categories Box */}
