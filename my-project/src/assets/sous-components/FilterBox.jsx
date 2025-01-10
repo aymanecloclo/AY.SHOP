@@ -2,7 +2,7 @@ import { FaLifeRing, FaStar, FaStarHalfAlt, FaApple, FaWindows, FaAndroid, FaApp
 import { Slider } from "@/components/ui/slider";
 import { GiTShirt, GiSmartphone, GiLaptop, GiGamepad } from "react-icons/gi"; // Icônes supplémentaires
 
-const FilterBox = ({handleSliderChange, Categories, sliderValue, handleFilterChange}) => {
+const FilterBox = ({handleSliderChange,className, Categories, sliderValue, handleFilterChange}) => {
     const operatingSystems = [
         { name: 'Windows', icon: <FaWindows className="text-blue-500" /> },
         { name: 'macOS', icon: <FaApple className="text-gray-700" /> },
@@ -22,7 +22,7 @@ const FilterBox = ({handleSliderChange, Categories, sliderValue, handleFilterCha
 const sizes = ['Small', 'Medium', 'Large']; 
     const ratings = [5, 4, 3, 2, 1];
   return (
-    <div className="flex flex-col w-full sm:w-3/12 md:w-2/12 gap-12">
+    <div className={` ${className} flex  flex-col w-full sm:w-3/12 md:w-2/12 gap-12`}>
       {/* Categories Box */}
       <div className="categories-group w-full">
         <ul className="w-fulltext-surface dark:text-white border rounded-lg shadow-lg bg-white dark:bg-gray-800">

@@ -3,6 +3,7 @@ import { Cloudinary } from '@cloudinary/url-gen';
 import { auto } from '@cloudinary/url-gen/actions/resize';
 import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
 import { AdvancedImage } from '@cloudinary/react';
+import { GiSettingsKnobs } from "react-icons/gi";
 const cld = new Cloudinary({ cloud: { cloudName: 'dqboz50e8' } });
         
 const filterOptions = [
@@ -14,7 +15,7 @@ const filterOptions = [
     { label: "Discount %", href: "#" },
   ];
   
-  const Breadcrumb = () => (
+  const Breadcrumb = ({handleShowMobileFilter}) => (
     <div className="mb-4 items-end justify-between space-y-4 sm:flex sm:space-y-0 md:mb-8">
       <div>
         <nav className="flex" aria-label="Breadcrumb">
@@ -47,15 +48,13 @@ const filterOptions = [
         </nav>
         <h2 className="mt-3 text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Electronics</h2>
       </div>
-      <div className="flex items-center space-x-4">
-        <button data-modal-toggle="filterModal" data-modal-target="filterModal" type="button" className="flex w-full items-center justify-center rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700 sm:w-auto">
+      <div className="flex items-center space-x-4 ">
+        <button onClick={handleShowMobileFilter} data-modal-toggle="filterModal" data-modal-target="filterModal" type="button" className="md:hidden flex  w-full items-center justify-center rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700 sm:w-auto">
           <svg className="-ms-0.5 me-2 h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M18.796 4H5.204a1 1 0 0 0-.753 1.659l5.302 6.058a1 1 0 0 1 .247.659v4.874a.5.5 0 0 0 .2.4l3 2.25a.5.5 0 0 0 .8-.4v-7.124a1 1 0 0 1 .247-.659l5.302-6.059c.566-.646.106-1.658-.753-1.658Z" />
           </svg>
           Filters
-          <svg className="-me-0.5 ms-2 h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 9-7 7-7-7" />
-          </svg>
+          <GiSettingsKnobs size={20} className='ms-2 ' />
         </button>
         <button id="sortDropdownButton1" data-dropdown-toggle="dropdownSort1" type="button" className="flex w-full items-center justify-center rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700 sm:w-auto">
           <svg className="-ms-0.5 me-2 h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -92,7 +91,7 @@ const filterOptions = [
         .resize(auto().gravity(autoGravity()).width(500).height(500));
     }
     return (
-      <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+      <div className="  rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800 z-10">
         <div className="h-56 w-full">
       
               <AdvancedImage cldImg={img} />
@@ -168,14 +167,14 @@ const filterOptions = [
  
   
   
-const ShopSection = ({productsAll}) => {
+const ShopSection = ({productsAll,handleShowMobileFilter}) => {
   return(
     <>
-      <section className="bg-gray-50 py-8 antialiased dark:bg-gray-900 md:py-12">
-  <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
+      <section className="bg-gray-50 py-8 antialiased dark:bg-gray-900 md:py-12 mx-0 px-0">
+  <div className="md:mx-auto max-w-screen-xl 2xl:px-0 ">
 
-   <Breadcrumb/>
-    <div className="mb-4 grid gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4">
+   <Breadcrumb handleShowMobileFilter={handleShowMobileFilter}/>
+    <div className="mb-4 grid gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4  ">
     {productsAll.map((product,index) => (
         <ProductCard key={product.id || index} product={product} />
       ))}
