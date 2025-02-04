@@ -91,7 +91,7 @@ const filterOptions = [
         .resize(auto().gravity(autoGravity()).width(500).height(500));
     }
     return (
-      <div className="  rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800 z-10">
+      <div className="  rounded-lg border e border-gray-200  p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800 z-10">
         <div className="h-56 w-full">
       
               <AdvancedImage cldImg={img} />

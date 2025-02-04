@@ -18,10 +18,8 @@ export default function Nav() {
   return (
     <>
     
-      <Header handleShowMenu={handleShowMenu}/>
-
+         <Header handleShowMenu={handleShowMenu}/>
          <TopNav />
-  
          <Menu menu={menu} showMenu={showMenu}    />
          <MobileMenu handleShowMenu={handleShowMenu}  showMenu={showMenu}  menu={menu}/>
    

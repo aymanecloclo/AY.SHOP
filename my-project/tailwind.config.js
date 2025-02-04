@@ -1,7 +1,7 @@
 
 /** @type {import('tailwindcss').Config} */
 export default {
-    darkMode: ["class"],
+    darkMode: ["class",'media'],
     content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
   	extend: {
@@ -56,6 +56,6 @@ export default {
   },
   plugins: [
     require('daisyui'),
-      require("tailwindcss-animate")
+    require("tailwindcss-animate")
 ],
 }

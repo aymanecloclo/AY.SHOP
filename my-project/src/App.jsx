@@ -13,7 +13,7 @@ export default function App() {
        <Nav/>
       <Routes>
              <Route path='/' element={<Home/>}/>
-            <Route path='register' element={<Register/>}/>
+             <Route path='register' element={<Register/>}/>
              <Route path="/profile" element={<PrivateRoute />} />
         
       </Routes>
