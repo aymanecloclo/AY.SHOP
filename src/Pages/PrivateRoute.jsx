@@ -32,7 +32,13 @@ export const PrivateRoute = () => {
   if (isLoading) {
     return <div>Loading ...</div>;
   }
-  return <div>Private Content</div>;
+  if (isAuthenticated) {
+    return <div>Private Content</div>;
+  }
+  else {
+    return <div>404</div>;
+
+  }
 };
 
 

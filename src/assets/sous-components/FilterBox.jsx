@@ -1,30 +1,45 @@
+import { useState } from "react";
 import { FaLifeRing, FaStar, FaStarHalfAlt, FaApple, FaWindows, FaAndroid, FaAppleAlt } from "react-icons/fa";
 import { Slider } from "@/components/ui/slider";
-import { GiTShirt, GiSmartphone, GiLaptop, GiGamepad } from "react-icons/gi"; // Icônes supplémentaires
+import { GiTShirt, GiSmartphone, GiLaptop, GiGamepad } from "react-icons/gi";
 
-const FilterBox = ({handleSliderChange,className, Categories, sliderValue, handleFilterChange}) => {
-    const operatingSystems = [
-        { name: 'Windows', icon: <FaWindows className="text-blue-500" /> },
-        { name: 'macOS', icon: <FaApple className="text-gray-700" /> },
-        { name: 'Android', icon: <FaAndroid className="text-green-500" /> },
-        { name: 'iOS', icon: <FaAppleAlt className="text-gray-400" /> }
-    ];
-    const brands = ['Apple', 'Samsung', 'Dell', 'HP', 'Asus'];
-    const colors = [
-      { name: 'Black', code: '#000000' },
-      { name: 'White', code: '#FFFFFF' },
-      { name: 'Red', code: '#FF0000' },
-      { name: 'Blue', code: '#0000FF' },
-      { name: 'Green', code: '#008000' }
-    ];
-    
- 
-const sizes = ['Small', 'Medium', 'Large']; 
-    const ratings = [5, 4, 3, 2, 1];
+const FilterBox = ({ handleSliderChange, className, Categories, sliderValue, handleFilterChange }) => {
+  const [selectedFilters, setSelectedFilters] = useState({
+    category: null,
+    operatingSystem: null,
+    color: null,
+    size: null,
+    rating: null,
+  });
+
+  const toggleFilter = (type, value) => {
+    setSelectedFilters((prev) => ({
+      ...prev,
+      [type]: prev[type] === value ? null : value,
+    }));
+    handleFilterChange(type, value);
+  };
+
+  const operatingSystems = [
+    { name: 'Windows', icon: <FaWindows className="text-blue-500" /> },
+    { name: 'macOS', icon: <FaApple className="text-gray-700" /> },
+    { name: 'Android', icon: <FaAndroid className="text-green-500" /> },
+    { name: 'iOS', icon: <FaAppleAlt className="text-gray-400" /> }
+  ];
+  const brands = ['Apple', 'Samsung', 'Dell', 'HP', 'Asus'];
+  const colors = [
+    { name: 'Black', code: '#000000' },
+    { name: 'White', code: '#FFFFFF' },
+    { name: 'Red', code: '#FF0000' },
+    { name: 'Blue', code: '#0000FF' },
+    { name: 'Green', code: '#008000' }
+  ];
+
+  const sizes = ['Small', 'Medium', 'Large'];
+  const ratings = [5, 4, 3, 2, 1];
+
   return (
-    <div
-      className={` ${className} flex  flex-col w-full sm:w-3/12 md:w-2/12 gap-12`}
-    >
+    <div className={` ${className} flex  flex-col mt-16 w-full sm:w-3/12 md:w-2/12 gap-12 box-border`}>
       {/* Categories Box */}
       <div className="categories-group w-full">
         <ul className="w-full text-surface dark:text-white border rounded-lg shadow-lg bg-white dark:bg-gray-800">
@@ -33,9 +48,9 @@ const sizes = ['Small', 'Medium', 'Large'];
           </li>
           {Categories.map((element, index) => (
             <li
-              className="w-full border-b rounded-lg bg-primary-100 p-4 text-primary-700 dark:bg-slate-900 dark:text-primary-500 flex items-center gap-2 hover:bg-indigo-50 dark:hover:bg-indigo-900 transition-colors cursor-pointer"
+              className={`w-full border-b  p-4 text-primary-700 dark:text-primary-500 flex items-center gap-2 cursor-pointer transition-colors ${selectedFilters.category === element.name ? 'bg-indigo-50 dark:bg-indigo-800' : 'bg-primary-100 dark:bg-slate-900 hover:bg-indigo-50 dark:hover:bg-indigo-900'}`}
               key={index}
-              onClick={() => handleFilterChange("category", element.name)}
+              onClick={() => toggleFilter("category", element.name)}
             >
               {element.icon}
               {element.name}
@@ -52,10 +67,10 @@ const sizes = ['Small', 'Medium', 'Large'];
           </li>
           <li className="w-full border-b rounded-lg bg-primary-100 p-4 text-primary-700 dark:bg-slate-900 dark:text-primary-500 flex flex-col gap-3">
             <Slider
-          
               className="w-full"
-              onValueChange={(value) =>{
-                handleSliderChange(value[0])}}
+              onValueChange={(value) => {
+                handleSliderChange(value[0])
+              }}
               value={[sliderValue]}
               min={0}
               max={22000}
@@ -76,13 +91,12 @@ const sizes = ['Small', 'Medium', 'Large'];
           </li>
           {operatingSystems.map((os, index) => (
             <li
-              onClick={() => handleFilterChange("operatingSystem", os.name)}
+              onClick={() => toggleFilter("operatingSystem", os.name)}
               key={index}
-              className="w-full border-b rounded-lg bg-primary-100 p-4 text-primary-700 dark:bg-slate-900 dark:text-primary-500 hover:bg-indigo-50 dark:hover:bg-indigo-900 transition-colors cursor-pointer"
+              className={`w-full border-b rounded-lg p-4 text-primary-700 dark:text-primary-500 flex items-center gap-2 cursor-pointer transition-colors ${selectedFilters.operatingSystem === os.name ? 'bg-indigo-50 dark:bg-indigo-800' : 'bg-primary-100 dark:bg-slate-900 hover:bg-indigo-50 dark:hover:bg-indigo-900'}`}
             >
-              <span className="flex items-center gap-2">
-                {os.icon} {os.name}
-              </span>
+              {os.icon}
+              {os.name}
             </li>
           ))}
         </ul>
@@ -96,17 +110,12 @@ const sizes = ['Small', 'Medium', 'Large'];
           </li>
           {colors.map((color, index) => (
             <li
-              onClick={() => handleFilterChange("color", color.name)}
+              onClick={() => toggleFilter("color", color.name)}
               key={index}
-              className="w-full flex gap-2 items-center border-b rounded-lg bg-primary-100 p-4 text-primary-700 dark:bg-slate-900 dark:text-primary-500 hover:bg-indigo-50 dark:hover:bg-indigo-900 transition-colors cursor-pointer"
+              className={`w-full flex gap-2 items-center border-b rounded-lg p-4 text-primary-700 dark:text-primary-500 cursor-pointer transition-colors ${selectedFilters.color === color.name ? 'bg-indigo-50 dark:bg-indigo-800' : 'bg-primary-100 dark:bg-slate-900 hover:bg-indigo-50 dark:hover:bg-indigo-900'}`}
             >
-              <div
-                className=" border w-5 h-5 rounded-full"
-                style={{ backgroundColor: color.code }} // Afficher la couleur réelle ici
-              ></div>
-              <span className="flex items-center gap-2 text-sm">
-                {color.name} <span className="text-xs text-gray-500"></span>
-              </span>
+              <div className="border w-5 h-5 rounded-full" style={{ backgroundColor: color.code }}></div>
+              <span className="flex items-center gap-2 text-sm">{color.name}</span>
             </li>
           ))}
         </ul>
@@ -120,13 +129,12 @@ const sizes = ['Small', 'Medium', 'Large'];
           </li>
           {sizes.map((size, index) => (
             <li
-              onClick={() => handleFilterChange("size", size)}
+              onClick={() => toggleFilter("size", size)}
               key={index}
-              className="w-full border-b rounded-lg bg-primary-100 p-4 text-primary-700 dark:bg-slate-900 dark:text-primary-500 hover:bg-indigo-50 dark:hover:bg-indigo-900 transition-colors cursor-pointer"
+              className={`w-full border-b rounded-lg p-4 text-primary-700 dark:text-primary-500 flex items-center gap-2 cursor-pointer transition-colors ${selectedFilters.size === size ? 'bg-indigo-50 dark:bg-indigo-800' : 'bg-primary-100 dark:bg-slate-900 hover:bg-indigo-50 dark:hover:bg-indigo-900'}`}
             >
-              <span className="flex items-center gap-2">
-                <GiSmartphone className="text-black" /> {size}
-              </span>
+              <GiSmartphone className="text-black" />
+              {size}
             </li>
           ))}
         </ul>
@@ -140,17 +148,13 @@ const sizes = ['Small', 'Medium', 'Large'];
           </li>
           {ratings.map((rating, index) => (
             <li
-              onClick={() => handleFilterChange("rating", rating)}
+              onClick={() => toggleFilter("rating", rating)}
               key={index}
-              className="w-full border-b rounded-lg bg-primary-100 p-4 text-primary-700 dark:bg-slate-900 dark:text-primary-500 hover:bg-indigo-50 dark:hover:bg-indigo-900 transition-colors cursor-pointer"
+              className={`w-full border-b rounded-lg p-4 text-primary-700 dark:text-primary-500 cursor-pointer transition-colors ${selectedFilters.rating === rating ? 'bg-indigo-50 dark:bg-indigo-800' : 'bg-primary-100 dark:bg-slate-900 hover:bg-indigo-50 dark:hover:bg-indigo-900'}`}
             >
               <div className="flex items-center">
-                {[...Array(rating)].map((_, i) => (
-                  <FaStar key={i} className="text-yellow-400" />
-                ))}
-                {[...Array(5 - rating)].map((_, i) => (
-                  <FaStarHalfAlt key={i} className="text-gray-400" />
-                ))}
+                {[...Array(rating)].map((_, i) => <FaStar key={i} className="text-yellow-400" />)}
+                {[...Array(5 - rating)].map((_, i) => <FaStarHalfAlt key={i} className="text-gray-400" />)}
               </div>
             </li>
           ))}

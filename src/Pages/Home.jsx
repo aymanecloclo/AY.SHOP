@@ -6,7 +6,7 @@ const Home=()=>{
     return(
         <>
         <main className="bg-gray-50 m-0 p-0 overflow-x-hidden">
-        <PubComponent/>
+        <PubComponent />
         <ShopBox/>
         </main>
         </>

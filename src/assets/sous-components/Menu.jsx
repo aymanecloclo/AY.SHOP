@@ -6,7 +6,7 @@ export  const Menu= ({menu,showMenu}) => (
 
 
   
-  <div className="  flex items-center px-16 py-3">
+  <div className="  flex items-center px-16 py-3 bg-white">
   
   {/* desktop section  */}
   <ul
