@@ -9,11 +9,14 @@ import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
 // Initialize Cloudinary
 const cld = new Cloudinary({ cloud: { cloudName: 'dqboz50e8' } });
 
-const CartSidebar = ({ isOpen, onClose }) => {
+const CartSidebar = ({ isOpen, onClose, products }) => {
   const { cartCount, cart, removeFromCart } = useContext(CartContext);
 
   // Calculate the total price of all items in the cart
-  const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+  const totalPrice = cart.reduce((total, cartItem) => {
+    const product = products.find((p) => p.id === cartItem.id);
+    return total + (product ? product.price * cartItem.quantity : 0);
+  }, 0);
 
   return (
     <>
@@ -40,13 +43,15 @@ const CartSidebar = ({ isOpen, onClose }) => {
 
         {cart.length > 0 ? (
           <div className="p-5 space-y-4 overflow-y-auto max-h-[80vh]">
-            {cart.map((item, index) => {
+            {cart.map((cartItem, index) => {
+              const product = products.find((p) => p.id === cartItem.id);
+              if (!product) return null;
+
               // Generate the Cloudinary image URL
               let img;
-
-              if (item.imgId) {
+              if (product.imgId) {
                 img = cld
-                  .image(item.imgId)
+                  .image(product.imgId)
                   .format("auto")
                   .quality("auto")
                   .resize(auto().gravity(autoGravity()).width(500).height(500));
@@ -56,13 +61,13 @@ const CartSidebar = ({ isOpen, onClose }) => {
                 <div key={index} className="flex justify-between items-center border-b pb-2">
                   <AdvancedImage cldImg={img} className="w-12 h-12 object-cover rounded"/>
                   <div className="flex-1 ml-3">
-                    <h3 className="text-sm font-medium">{item.name}</h3>
-                    <p className="text-xs text-gray-500">Qty: {item.quantity}</p>
+                    <h3 className="text-sm font-medium">{product.name}</h3>
+                    <p className="text-xs text-gray-500">Qty: {cartItem.quantity}</p>
                   </div>
-                  <span className="text-sm font-semibold">${item.price}</span>
+                  <span className="text-sm font-semibold">${product.price}</span>
                   {/* Close button to remove item from cart */}
                   <button 
-                    onClick={() => removeFromCart(item.id)} // Assuming `item.id` is the unique identifier
+                    onClick={() => removeFromCart(cartItem.id)} // Assuming `cartItem.id` is the unique identifier
                     className="text-gray-500 hover:text-red-500"
                   >
                     <IoClose />

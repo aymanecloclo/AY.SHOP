@@ -6,6 +6,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { useContext } from "react";
 import CartSidebar from "./CartSidebar";
 import { CartContext } from "../context/CartContext";
+import productsAll from '@/data/productsALL';
 
 const Header = ({ handleShowMenu }) => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -113,7 +114,7 @@ const Header = ({ handleShowMenu }) => {
       </section>
 
 
-      <CartSidebar isOpen={cartOpen} onClose={() => setCartOpen(false)} />
+      <CartSidebar products={productsAll} isOpen={cartOpen} onClose={() => setCartOpen(false)} />
     </header>
   );
 };
