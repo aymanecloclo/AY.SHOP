@@ -1,6 +1,6 @@
 import PubComponent from "../components/PubComponent";
 import ShopBox from "../components/ShopBox";
-const Home=()=>{
+const Store=()=>{
 
 
     return(
@@ -13,4 +13,4 @@ const Home=()=>{
     )
 }
 
-export default Home;
+export default Store;

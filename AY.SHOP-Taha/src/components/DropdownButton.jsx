@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { sortProducts } from "@/slicers/shopSlice";
 import {
   Select,
   SelectContent,
@@ -7,15 +9,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ImSortAlphaAsc, ImSortAlphaDesc } from "react-icons/im";
-const DropdownButton = ({ products, setFilteredProducts }) => {
+
+const DropdownButton = () => {
+  const dispatch = useDispatch();
+
   const handleSortChange = (value) => {
-    let sortedProducts;
-    if (value === "Croissant") {
-      sortedProducts = [...products].sort((a, b) => a.price - b.price); // Sort ascending
-    } else if (value === "Décroissant") {
-      sortedProducts = [...products].sort((a, b) => b.price - a.price); // Sort descending
-    }
-    setFilteredProducts(sortedProducts); // Update the filtered products list
+    dispatch(sortProducts({ order: value }));
   };
 
   return (

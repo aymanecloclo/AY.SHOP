@@ -1,72 +1,213 @@
-import React from 'react';
-import { FaStar, FaShoppingCart, FaHeart } from 'react-icons/fa';
+// import { useContext, useState } from "react";
+// import { Cloudinary } from "@cloudinary/url-gen";
+// import { auto } from "@cloudinary/url-gen/actions/resize";
+// import { autoGravity } from "@cloudinary/url-gen/qualifiers/gravity";
 
+// import { IoCartOutline } from "react-icons/io5";
+// import { GiSettingsKnobs } from "react-icons/gi";
 
-const ProductCard = ({ product }) => {
-  return (
-    <div className="card shadow-lg h-[400px] w-[280px] group gap-[1em] rounded-[1.5em] relative flex justify-end flex-col p-[1.5em] z-[1] overflow-hidden bg-white hover:shadow-xl transition-shadow duration-300">
-      <div className="container text-gray-800 z-[2] relative font-nunito flex flex-col gap-[1em]">
-        <div className="h-fit w-full">
-          <h1
-            className="card_heading text-[1.5em] font-bold tracking-[.1em] text-gray-900"
-          >
-            {product.name}
-          </h1>
-          <p
-            className="text-[1.1em] text-gray-600"
-          >
-            By {product.brand}
-          </p>
-        </div>
+// import { IoIosClose } from "react-icons/io";
 
-        {/* Image du produit */}
-        <div className="flex justify-center items-center">
-          <img
-            src={product.img}
-            alt={product.name}
-            className="h-[200px] w-[200px] object-cover rounded-lg"
-          />
-        </div>
+// import Breadcrumb from "@/assets/sous-components/Breadcrumb";
+// import ProductCard from "@/assets/sous-components/ProductCard";
+// import DropdownButton from "./DropdownButton";
 
-        <div className="flex justify-between items-center w-full gap-[1.5em]">
-          <div className="flex gap-[0.5em]">
-            <FaStar className="h-[1.5em] w-[1.5em] text-yellow-400" />
-            <FaShoppingCart className="h-[1.5em] w-[1.5em] text-gray-700 hover:text-green-500 transition-all duration-200 cursor-pointer" />
-            <FaHeart className="h-[1.5em] w-[1.5em] text-gray-700 hover:text-red-500 transition-all duration-200 cursor-pointer" />
-          </div>
+// import { FaBagShopping } from "react-icons/fa6";
 
-          <div className="text-gray-800 font-semibold text-[1.2em]">
-            {product.rating} / 5 stars
-          </div>
-        </div>
+// import {
+//   AlertDialog,
+//   AlertDialogAction,
+//   AlertDialogCancel,
+//   AlertDialogContent,
+//   AlertDialogDescription,
+//   AlertDialogFooter,
+//   AlertDialogHeader,
+//   AlertDialogTitle,
+//   AlertDialogTrigger,
+// } from "@/components/ui/alert-dialog";
+// import { AdvancedImage } from "@cloudinary/react";
+// import { CartContext } from "@/context/CartContext";
+// import { BsCartPlus } from "react-icons/bs";
 
-        {/* Catégorie */}
-        <div className="flex justify-center items-center h-fit w-fit gap-[0.5em]">
-          <div className="border-2 border-gray-800 rounded-[0.5em] text-gray-800 font-semibold text-[1em] px-[0.5em] py-[0.25em] hover:bg-gray-800 hover:text-white transition-colors duration-300 cursor-pointer">
-            <p>{product.category}</p>
-          </div>
-        </div>
-      </div>
-      
-      {/* Description du produit */}
-      <p className="text-gray-600 font-light text-[0.9em] mt-[1em] leading-[1.4em]">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet officiis, dolorem ab animi magnam culpa fugit error voluptates adipisci, debitis ut fuga at nisi laborum suscipit a eos similique unde.
-      </p>
-    </div>
-  );
-};
+//   const cld = new Cloudinary({ cloud: { cloudName: "dqboz50e8" } });
 
+// const ProductCard = ({ product }) => {
 
+//   let img;
 
+//   if (product.imgId) {
+//     img = cld
+//       .image(product.imgId)
+//       .format("auto")
+//       .quality("auto")
+//       .resize(auto().gravity(autoGravity()).width(500).height(500));
+//   }
 
-const ProductList = ({productsAll}) => {
-  return (
-    <div className="flex flex-wrap justify-center gap-[2em]">
-      {productsAll.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
-    </div>
-  );
-};
+//   const { addToCart, removeFromCart } = useContext(CartContext);
 
-export default ProductList;
+//   const handleAddToCart = (product) => {
+//     setShowModal(true);
+//     addToCart(product);
+//   };
+//   const { cartOpen, setCartOpen } = useContext(CartContext);
+//   return (
+//     <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+//       <div className="md:w-full">
+//         <AdvancedImage cldImg={img} />
+//       </div>
+
+//       <div className="pt-6">
+//         <div className="mb-4 flex items-center justify-between gap-4">
+//           <span className="me-2 rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-300">
+//             {product.category}
+//           </span>
+//           <div className="flex items-center justify-end gap-1 ">
+//             <button
+//               type="button"
+//               data-tooltip-target="tooltip-quick-look"
+//               className="rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+//             >
+//               <span className="sr-only">Quick look</span>
+//               <svg
+//                 className="h-5 w-5"
+//                 aria-hidden="true"
+//                 xmlns="http://www.w3.org/2000/svg"
+//                 width="24"
+//                 height="24"
+//                 fill="none"
+//                 viewBox="0 0 24 24"
+//               >
+//                 <path
+//                   stroke="currentColor"
+//                   strokeWidth="2"
+//                   d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"
+//                 />
+//                 <path
+//                   stroke="currentColor"
+//                   strokeWidth="2"
+//                   d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+//                 />
+//               </svg>
+//             </button>
+//           </div>
+//         </div>
+
+//         <a
+//           href="#"
+//           className="text-lg font-semibold leading-tight text-gray-900 hover:underline dark:text-white"
+//         >
+//           {product.name}
+//         </a>
+//         <div className="mt-2 flex items-center gap-2">
+//           <div className="flex items-center">
+//             {[...Array(5)].map((_, index) => (
+//               <svg
+//                 key={index}
+//                 className={`h-4 w-4 ${
+//                   index < product.rating ? "text-yellow-400" : "text-gray-300"
+//                 }`}
+//                 aria-hidden="true"
+//                 xmlns="http://www.w3.org/2000/svg"
+//                 fill="currentColor"
+//                 viewBox="0 0 24 24"
+//               >
+//                 <path d="M13.8 4.2a2 2 0 0 0-3.6 0L8.4 8.4l-4.6.3a2 2 0 0 0-1.1 3.5l3.5 3-1 4.4c-.5 1.7 1.4 3 2.9 2.1l3.9-2.3 3.9 2.3c1.5 1 3.4-.4 3-2.1l-1-4.4 3.4-3a2 2 0 0 0-1.1-3.5l-4.6-.3-1.8-4.2Z" />
+//               </svg>
+//             ))}
+//             <p className="text-sm font-medium text-gray-900 dark:text-white">
+//               {product.rating}
+//             </p>
+//             <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
+//               ({product.rating * 100})
+//             </p>
+//           </div>
+//         </div>
+
+//         <ul className="mt-2 flex items-center gap-4">
+//           <li className="flex items-center gap-2">
+//             <svg
+//               className="h-4 w-4 text-gray-500 dark:text-gray-400"
+//               aria-hidden="true"
+//               xmlns="http://www.w3.org/2000/svg"
+//               fill="none"
+//               viewBox="0 0 24 24"
+//             >
+//               <path
+//                 stroke="currentColor"
+//                 strokeLinecap="round"
+//                 strokeLinejoin="round"
+//                 strokeWidth="2"
+//                 d="M13 7h6l2 4m-8-4v8m0-8V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v9h2m8 0H9m4 0h2m4 0h2v-4m0 0h-5m3.5 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z"
+//               />
+//             </svg>
+//             <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
+//               {product.operatingSystem}
+//             </p>
+//           </li>
+//           <li className="flex items-center gap-2">
+//             <svg
+//               className="h-4 w-4 text-gray-500 dark:text-gray-400"
+//               aria-hidden="true"
+//               xmlns="http://www.w3.org/2000/svg"
+//               fill="none"
+//               viewBox="0 0 24 24"
+//             >
+//               <path
+//                 stroke="currentColor"
+//                 strokeLinecap="round"
+//                 strokeLinejoin="round"
+//                 strokeWidth="2"
+//                 d="M3 9l3 3-3 3m4-6l3 3-3 3m4-6l3 3-3 3m4-6l3 3-3 3m4-6l3 3-3 3"
+//               />
+//             </svg>
+//             <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
+//               {product.size}
+//             </p>
+//           </li>
+//         </ul>
+//         <div className="mt-4 flex items-center justify-between sm:gap-4">
+//           <span className="sm:text-sm md:text-base text-xs font-semibold text-gray-900 dark:text-white flex gap-1 items-center">
+//             {product.price} <span>DH</span>
+//           </span>
+//           <button
+//             className="hover:bg-gray-100 px-2 py-2 rounded-full transition-all duration-300 ease-in-out"
+//             onClick={() => {
+//               handleAddToCart(product);
+//             }}
+//           >
+//             <AlertDialog>
+//               <AlertDialogTrigger>
+//                 <span className="relative inline-block w-5 h-5">
+//                   <BsCartPlus
+//                     size={20}
+//                     className={`absolute inset-0 transition-opacity transform duration-300`}
+//                   />
+//                   {/* <FaBagShopping
+//                 size={20}
+//                 color="green"
+//                 className={`absolute inset-0 transition-opacity transform duration-300 ${cartIcon ? "opacity-0 scale-90" : "opacity-100 scale-100"
+//                   }`}
+//               /> */}
+//                 </span>
+//               </AlertDialogTrigger>
+//               <AlertDialogContent>
+//                 <AlertDialogHeader>
+//                   <AlertDialogTitle> Item added successfully!</AlertDialogTitle>
+//                   <AlertDialogDescription></AlertDialogDescription>
+//                 </AlertDialogHeader>
+//                 <AlertDialogFooter>
+//                   <AlertDialogCancel>Cancel</AlertDialogCancel>
+//                   <AlertDialogAction onClick={() => setCartOpen(!cartOpen)}>
+//                     {" "}
+//                     View Cart
+//                   </AlertDialogAction>
+//                 </AlertDialogFooter>
+//               </AlertDialogContent>
+//             </AlertDialog>
+//           </button>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+// export default ProductCard;

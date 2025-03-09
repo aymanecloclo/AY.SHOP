@@ -3,26 +3,7 @@ import CartItem from "./CartItem";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "PC system All in One APPLE iMac (2023)",
-      imageLight:
-        "https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg",
-      imageDark:
-        "https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg",
-      price: 1499,
-      quantity: 2,
-    },
-    {
-      id: 2,
-      name: "Restored Apple Watch Series 8",
-      imageLight:
-        "https://flowbite.s3.amazonaws.com/blocks/e-commerce/apple-watch-light.svg",
-      imageDark:
-        "https://flowbite.s3.amazonaws.com/blocks/e-commerce/apple-watch-dark.svg",
-      price: 598,
-      quantity: 1,
-    },
+ 
     // Add more items as needed
   ]);
 
@@ -49,7 +30,7 @@ const Cart = () => {
     <section className="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
       <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
         <h2 className="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">
-          Shopping Cart
+          Shopping Cartt
         </h2>
 
         <div className="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
