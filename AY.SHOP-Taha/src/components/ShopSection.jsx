@@ -52,7 +52,7 @@ const ProductCard = ({ product }) => {
   const { addToCart, removeFromCart } = useContext(CartContext);
 
   const handleAddToCart = (product) => {
-    setShowModal(true);
+  
     addToCart(product);
   };
   const { cartOpen, setCartOpen } = useContext(CartContext);
@@ -188,12 +188,7 @@ const ProductCard = ({ product }) => {
                     size={20}
                     className={`absolute inset-0 transition-opacity transform duration-300`}
                   />
-                  {/* <FaBagShopping
-                size={20}
-                color="green"
-                className={`absolute inset-0 transition-opacity transform duration-300 ${cartIcon ? "opacity-0 scale-90" : "opacity-100 scale-100"
-                  }`}
-              /> */}
+           
                 </span>
               </AlertDialogTrigger>
               <AlertDialogContent>

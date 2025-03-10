@@ -8,9 +8,21 @@ const initialState = {
     color: "",
     rating: "",
     operatingSystem: "",
-    sliderValue: 0,
+    sliderValue: 22000, // Valeur max par défaut
   },
   filteredProducts: productsAll,
+};
+
+const applyFilters = (filters) => {
+  return productsAll.filter((product) => {
+    return Object.entries(filters).every(([key, value]) => {
+      if (!value || value === "") return true; // Ignore les filtres vides
+
+      if (key === "sliderValue") return product.price <= value; // Gestion du prix
+
+      return product[key] === value;
+    });
+  });
 };
 
 const shopSlice = createSlice({
@@ -19,27 +31,17 @@ const shopSlice = createSlice({
   reducers: {
     setFilter: (state, action) => {
       state.filters = { ...state.filters, ...action.payload };
-      state.filteredProducts = productsAll.filter((product) =>
-        Object.keys(state.filters).every((key) =>
-          state.filters[key] ? product[key] === state.filters[key] : true
-        )
-      );
+      state.filteredProducts = applyFilters(state.filters);
     },
     resetFilters: (state) => {
-      state.filters = initialState.filters;
+      state.filters = { ...initialState.filters }; // Clonage pour éviter une référence partagée
       state.filteredProducts = productsAll;
     },
     sortProducts: (state, action) => {
       const { order } = action.payload;
-      if (order === "Croissant") {
-        state.filteredProducts = [...state.filteredProducts].sort(
-          (a, b) => a.price - b.price
-        );
-      } else if (order === "Décroissant") {
-        state.filteredProducts = [...state.filteredProducts].sort(
-          (a, b) => b.price - a.price
-        );
-      }
+      state.filteredProducts = [...state.filteredProducts].sort((a, b) =>
+        order === "Croissant" ? a.price - b.price : b.price - a.price
+      );
     },
   },
 });

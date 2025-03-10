@@ -28,7 +28,7 @@ const CartSidebar = ({ isOpen, onClose, products }) => {
       )}
 
       <div
-        className={`fixed top-0 right-0 h-full bg-white shadow-lg transform transition-transform duration-300 ease-in-out z-50 ${
+        className={`fixed top-0 right-0 w-3/12 h-full bg-white shadow-lg transform transition-transform duration-300 ease-in-out z-50 ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
         role="dialog"
@@ -80,7 +80,7 @@ const CartSidebar = ({ isOpen, onClose, products }) => {
                 className="w-full bg-gray-200 text-black py-2 rounded-md hover:bg-gray-300 transition-colors"
                 onClick={() => console.log("View Cart clicked")}
               >
-                View Cart
+                View Details
               </button>
               <button
                 className="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 transition-colors"
