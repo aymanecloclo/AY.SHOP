@@ -8,7 +8,7 @@ const initialState = {
     color: "",
     rating: "",
     operatingSystem: "",
-    sliderValue: 22000, // Valeur max par défaut
+    sliderValue: 22000, 
   },
   filteredProducts: productsAll,
 };

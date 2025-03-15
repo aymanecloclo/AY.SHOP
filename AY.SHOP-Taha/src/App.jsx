@@ -1,4 +1,4 @@
-import { CartProvider } from "./context/CartContext";
+
 import Store from "./Pages/Store";
 import Nav from "./components/Nav";
 import Register from "./components/Register";
@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Checkout from "./components/Checkout";
 export default function App() {
   return (
-    <CartProvider>
+
       <Router>
         <Nav />
         <Routes>
@@ -19,6 +19,6 @@ export default function App() {
         </Routes>
         <Footer />
       </Router>
-    </CartProvider>
+
   );
 }

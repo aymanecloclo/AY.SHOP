@@ -46,8 +46,13 @@ const CartItem = ({ item, product, onQuantityChange, removeFromCart }) => {
         <div className="flex items-center gap-4">
           {/* Quantity Controls */}
           <div className="flex items-center gap-2">
+            {/* Bouton Moins */}
             <button
-              onClick={() => onQuantityChange(item.id, "decrease")}
+              onClick={() => {
+                if (item.quantity > 1) {
+                  onQuantityChange(item.id, "decrease");
+                }
+              }}
               type="button"
               className="inline-flex items-center justify-center p-2 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors dark:bg-gray-700 dark:hover:bg-gray-600"
               aria-label="Decrease quantity"
@@ -69,6 +74,7 @@ const CartItem = ({ item, product, onQuantityChange, removeFromCart }) => {
               </svg>
             </button>
 
+            {/* Quantité */}
             <input
               type="text"
               value={item.quantity}
@@ -77,6 +83,7 @@ const CartItem = ({ item, product, onQuantityChange, removeFromCart }) => {
               aria-label="Quantity"
             />
 
+            {/* Bouton Plus */}
             <button
               onClick={() => onQuantityChange(item.id, "increase")}
               type="button"
@@ -104,7 +111,7 @@ const CartItem = ({ item, product, onQuantityChange, removeFromCart }) => {
       </div>
 
       {/* Price */}
-      <div className="text-right md:order-3 md:w-32">
+      <div className="text-right md:order-3 md:w-32 me-2">
         <p className="text-lg font-semibold text-gray-900 dark:text-white">
           ${(product.price * item.quantity).toFixed(2)}
         </p>

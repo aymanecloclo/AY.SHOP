@@ -1,46 +1,65 @@
-import { useState } from 'react';
-import AYSHOP_logo from '../assets/images/AYSHOP_logo.png'
+import { useState } from "react";
+import AYSHOP_logo from "../assets/images/AYSHOP_logo.png";
 import { RiMenu2Fill } from "react-icons/ri";
-import { Link } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react'
-import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useSelector, useDispatch } from "react-redux";
 import CartSidebar from "./CartSidebar";
-import { CartContext } from "../context/CartContext";
-import productsAll from '@/data/productsALL';
+import { toggleCart } from "../slicers/cartSlice"; // Importez l'action Redux
+import productsAll from "@/data/productsALL";
 
 const Header = ({ handleShowMenu }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const { cartCount, cartOpen, setCartOpen } = useContext(CartContext);
-  //  const {user,isAuth}=useSelector((state)=>state.user);
-  const { loginWithRedirect, user, isAuthenticated, logout } = useAuth0()
+  // Utiliser Redux pour accéder à l'état du panier
+  const dispatch = useDispatch();
+  const { cartCount, cartOpen } = useSelector((state) => state.cart);
+
+  const { loginWithRedirect, user, isAuthenticated, logout } = useAuth0();
+
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
+  const handleToggleCart = () => {
+    dispatch(toggleCart()); // Dispatcher l'action pour ouvrir/fermer le panier
+  };
+
   return (
     <header className="shadow-md bg-white font-[sans-serif] tracking-wide relative z-50">
-      <section className="flex items-center justify-between flex-wrap  gap-4 lg:py-0  sm:px-10 px-4 border-gray-200 border-b min-h-[75px]">
-        {/*  mobie menu button  */}
+      <section className="flex items-center justify-between flex-wrap gap-4 lg:py-0 sm:px-10 px-4 border-gray-200 border-b min-h-[75px]">
+        {/* Mobile menu button */}
         <div className="flex lg:hidden cursor-pointer" onClick={handleShowMenu}>
           <RiMenu2Fill size={25} />
         </div>
+
         {/* Logo */}
         <a href="." className="shrink-0">
-          <img src={AYSHOP_logo} alt="logo" className=" object-cover lg:w-[90px] hidden lg:block lg:h-20" />
+          <img
+            src={AYSHOP_logo}
+            alt="logo"
+            className="object-cover lg:w-[90px] hidden lg:block lg:h-20"
+          />
         </a>
 
         {/* Right side items (icons and profile) */}
         <div className="lg:absolute lg:right-10 flex items-center ml-auto space-x-8">
           <span className="relative">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20px" className="cursor-pointer fill-[#333] hover:fill-[#007bff] inline-block" viewBox="0 0 64 64">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20px"
+              className="cursor-pointer fill-[#333] hover:fill-[#007bff] inline-block"
+              viewBox="0 0 64 64"
+            >
               <path d="M45.5 4A18.53 18.53 0 0 0 32 9.86 18.5 18.5 0 0 0 0 22.5C0 40.92 29.71 59 31 59.71a2 2 0 0 0 2.06 0C34.29 59 64 40.92 64 22.5A18.52 18.52 0 0 0 45.5 4ZM32 55.64C26.83 52.34 4 36.92 4 22.5a14.5 14.5 0 0 1 26.36-8.33 2 2 0 0 0 3.27 0A14.5 14.5 0 0 1 60 22.5c0 14.41-22.83 29.83-28 33.14Z" />
             </svg>
-            <span className="absolute left-auto -ml-1 top-0 rounded-full bg-black px-1 py-0 text-xs text-white">1</span>
+            <span className="absolute left-auto -ml-1 top-0 rounded-full bg-black px-1 py-0 text-xs text-white">
+              1
+            </span>
           </span>
 
-          {/* Another icon */}
-          <span className="relative cursor-pointer" onClick={() => setCartOpen(!cartOpen)}>
+          {/* Cart Icon */}
+          <span className="relative cursor-pointer" onClick={handleToggleCart}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20px"
@@ -59,62 +78,76 @@ const Header = ({ handleShowMenu }) => {
             )}
           </span>
 
-          {/* Profile Icon  userConected*/}
-
+          {/* Profile Icon */}
           {isAuthenticated ? (
             <div className="dropdown dropdown-end">
-              <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
                 <div className="w-10 rounded-full">
-                  <div className="avatar placeholder" >
-                    <div className="bg-neutral text-neutral-content w-10  rounded-full cursor-pointer">
+                  <div className="avatar placeholder">
+                    <div className="bg-neutral text-neutral-content w-10 rounded-full cursor-pointer">
                       <span>{user.name.charAt(0).toUpperCase()}</span>
                     </div>
-
                   </div>
                 </div>
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              >
                 <li>
                   <Link to="/profile" className="justify-between">
                     Profile
                     <span className="badge">New</span>
                   </Link>
-
                 </li>
-                <li><a>Settings</a></li>
-                <li><a onClick={() => {
-                  logout({
-                    logoutParams: {
-                      returnTo: window.location.origin
-                    }
-                  });
-                }}>Logout</a></li>
+                <li>
+                  <a>Settings</a>
+                </li>
+                <li>
+                  <a
+                    onClick={() => {
+                      logout({
+                        logoutParams: {
+                          returnTo: window.location.origin,
+                        },
+                      });
+                    }}
+                  >
+                    Logout
+                  </a>
+                </li>
               </ul>
             </div>
-
-
-
-          ) :
-            (
-              <>
-                {/* <Link to='register'> */}
-                <div onClick={() => loginWithRedirect()} className="inline-block cursor-pointer border-gray-300">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" className="hover:fill-[#007bff]">
-                    <circle cx="10" cy="7" r="6" />
-                    <path d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z" />
-                  </svg>
-                </div>
-                {/* </Link> */}
-              </>
-            )}
-
+          ) : (
+            <div
+              onClick={() => loginWithRedirect()}
+              className="inline-block cursor-pointer border-gray-300"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20px"
+                height="20px"
+                viewBox="0 0 24 24"
+                className="hover:fill-[#007bff]"
+              >
+                <circle cx="10" cy="7" r="6" />
+                <path d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z" />
+              </svg>
+            </div>
+          )}
         </div>
       </section>
 
-
-      <CartSidebar products={productsAll} isOpen={cartOpen} onClose={() => setCartOpen(false)} />
+      {/* Cart Sidebar */}
+      <CartSidebar
+        products={productsAll}
+        isOpen={cartOpen}
+        onClose={() => dispatch(toggleCart())}
+      />
     </header>
   );
 };
