@@ -13,7 +13,7 @@ const ShopBox = () => {
 
   const handleFilterChange = (filterType, value) => {
     dispatch(
-      setFilter({ [filterType]: filters[filterType] === value ? "" : value })
+      setFilter({ [filterType]: value === filters[filterType] ? "" : value })
     );
   };
 
@@ -43,7 +43,7 @@ const ShopBox = () => {
       {/* Mobile Filter */}
       <div
         className={`bg-white ${
-          showMobileFilter ? "hidden" : ""
+          showMobileFilter ? "hidden" : "mobile-filters"
         } z-50 md:hidden w-full h-screen fixed top-0 flex-col px-5`}
       >
         <IoCloseSharp

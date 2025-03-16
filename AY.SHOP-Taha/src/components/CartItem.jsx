@@ -113,7 +113,7 @@ const CartItem = ({ item, product, onQuantityChange, removeFromCart }) => {
       {/* Price */}
       <div className="text-right md:order-3 md:w-32 me-2">
         <p className="text-lg font-semibold text-gray-900 dark:text-white">
-          ${(product.price * item.quantity).toFixed(2)}
+          {(product.price * item.quantity).toFixed(2)} Dhs
         </p>
       </div>
 

@@ -3,7 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { IoClose } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import CartItem from "./CartItem";
-import { removeFromCart, onQuantityChange } from "../slicers/cartSlice";
+import {
+  removeFromCart,
+  onQuantityChange,
+  clearCart,
+} from "../slicers/cartSlice";
 
 const CartSidebar = ({ isOpen, onClose, products }) => {
   const cart = useSelector((state) => state.cart.cart);
@@ -16,8 +20,9 @@ const CartSidebar = ({ isOpen, onClose, products }) => {
     return total + (product ? product.price * cartItem.quantity : 0);
   }, 0);
 
-  // Rediriger vers la page de paiement
+  // Rediriger vers la page de paiement et fermer la sidebar
   const handleCheckout = () => {
+    onClose(); 
     navigate("/checkout");
   };
 
@@ -42,7 +47,7 @@ const CartSidebar = ({ isOpen, onClose, products }) => {
         aria-labelledby="cart-title"
       >
         {/* Header */}
-        <div className="p-5 flex justify-between  items-center border-b">
+        <div className="p-5 flex justify-between items-center border-b">
           <h2 id="cart-title" className="text-lg font-semibold">
             Shopping Cart
           </h2>
@@ -83,21 +88,22 @@ const CartSidebar = ({ isOpen, onClose, products }) => {
             <div className="flex justify-between items-center mb-4">
               <span className="text-lg font-semibold">Total:</span>
               <span className="text-lg font-semibold">
-                ${totalPrice.toFixed(2)}
+                {totalPrice.toFixed(2)} Dhs
               </span>
             </div>
             <div className="flex flex-col md:flex-row gap-4">
               <button
                 className="w-full bg-gray-200 text-black py-2 rounded-md hover:bg-gray-300 transition-colors"
-                onClick={() => console.log("View Cart clicked")}
+                onClick={() => dispatch(clearCart())}
               >
-                View Details
+                Clear Cart
               </button>
+
               <button
                 className="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 transition-colors"
-                onClick={handleCheckout}
+                onClick={handleCheckout} // Appel à handleCheckout pour fermer la sidebar et rediriger
               >
-                Checkout
+                Continue to Payment
               </button>
             </div>
           </div>

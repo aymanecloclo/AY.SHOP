@@ -12,7 +12,7 @@ export default function App() {
       <Router>
         <Nav />
         <Routes>
-          <Route path="/" element={<Store />} />
+          <Route path="/store" element={<Store />} />
           <Route path="register" element={<Register />} />
           <Route path="/profile" element={<PrivateRoute />} />
           <Route path="/checkout" element={<Checkout />} />

@@ -1,35 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import productsAll from "@/data/productsALL";
 
-// Tableau initial de produits pour simuler un panier
-const initialProducts = [
-  {
-    id: 1,
-    name: "Product 1",
-    price: 10.99,
-    quantity: 2,
-    imgId: "image1",
-  },
-  {
-    id: 2,
-    name: "Product 2",
-    price: 15.99,
-    quantity: 1,
-    imgId: "image2",
-  },
-  {
-    id: 3,
-    name: "Product 3",
-    price: 7.99,
-    quantity: 3,
-    imgId: "image3",
-  },
-];
+// Initialiser les produits avec une quantité de 1 par défaut
+
+const initialProducts = [];
+
+// Extraire les trois premiers éléments
+const threeProducts = initialProducts.slice(0, 3);
+
 
 // État initial
 const initialState = {
-  cart: initialProducts,
+  cart: threeProducts,
   cartCount: initialProducts.reduce((total, item) => total + item.quantity, 0),
   cartTotal: initialProducts.reduce(
     (total, item) => total + item.quantity * item.price,
